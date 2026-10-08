@@ -7,6 +7,11 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 
 /* ---------- Walking dogs canvas ---------- */
 
+// iPhone Safari (not Chrome/Firefox/Edge on iOS) gets a full-screen-height canvas, see styles.css
+if (/iP(hone|ad|od)/.test(navigator.userAgent) && !/CriOS|FxiOS|EdgiOS|OPiOS/.test(navigator.userAgent)) {
+  document.documentElement.classList.add('ios-safari');
+}
+
 const canvas = document.getElementById('crowd-canvas');
 const ctx = canvas.getContext('2d');
 

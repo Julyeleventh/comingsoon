@@ -40,6 +40,16 @@ body {
   height: 100%;
 }
 
+/* iPhone Safari only: stretch the dogs' canvas to the full screen height so they
+   continue behind the glass toolbar instead of being cut off by a flat edge. */
+.ios-safari #crowd-canvas {
+  inset: auto;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  height: 100lvh;
+}
+
 .cs-overlay {
   position: relative;
   z-index: 2;
