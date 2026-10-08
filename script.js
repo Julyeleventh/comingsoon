@@ -8,9 +8,9 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 /* ---------- Walking dogs canvas ---------- */
 
 // iPhone Safari (not Chrome/Firefox/Edge on iOS) gets a full-screen-height canvas, see styles.css
-if (/iP(hone|ad|od)/.test(navigator.userAgent) && !/CriOS|FxiOS|EdgiOS|OPiOS/.test(navigator.userAgent)) {
-  document.documentElement.classList.add('ios-safari');
-}
+const isIosSafari =
+  /iP(hone|ad|od)/.test(navigator.userAgent) && !/CriOS|FxiOS|EdgiOS|OPiOS/.test(navigator.userAgent);
+if (isIosSafari) document.documentElement.classList.add('ios-safari');
 
 const canvas = document.getElementById('crowd-canvas');
 const ctx = canvas.getContext('2d');
@@ -91,7 +91,9 @@ function start() {
   for (let i = 0; i < total; i++) {
     const d = {
       x: -MARGIN + spacing * i,
-      offR: 0.17 + Math.random() * 0.13, // how much of the dog sinks below the bottom edge (feet cropped), as a share of its height
+      // iPhone Safari draws the page only down to the top of its toolbar, so there the dogs
+      // stand on that edge (feet visible) instead of being cut off by it.
+      offR: isIosSafari ? 0.02 + Math.random() * 0.04 : 0.17 + Math.random() * 0.13, // how much of the dog sinks below the bottom edge (feet cropped), as a share of its height
       speed: SPEED,
       direction: 1,
       phase: Math.random() * Math.PI * 2,
