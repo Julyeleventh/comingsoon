@@ -10,13 +10,30 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 const canvas = document.getElementById('crowd-canvas');
 const ctx = canvas.getContext('2d');
 
-let width = (canvas.width = window.innerWidth);
-let height = (canvas.height = window.innerHeight);
+// Canvas size follows the canvas element itself (not window.innerHeight, which
+// jumps around on phones when the address bar shows/hides, and differs between
+// Chrome and Safari). Drawn at device-pixel-ratio so it is sharp on phones.
+let width = 0;
+let height = 0;
 
-window.addEventListener('resize', () => {
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
-});
+function sizeCanvas() {
+  const w = canvas.clientWidth;
+  const h = canvas.clientHeight;
+  if (!w || !h) return;
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  width = w;
+  height = h;
+  canvas.width = Math.round(w * dpr);
+  canvas.height = Math.round(h * dpr);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+sizeCanvas();
+if (window.ResizeObserver) {
+  new ResizeObserver(sizeCanvas).observe(canvas);
+} else {
+  window.addEventListener('resize', sizeCanvas);
+}
 
 // Each dog is a horizontal strip of equal-width frames (all facing right).
 // frames: 1 = single pose (gets a bounce), >1 = real walk cycle.
@@ -50,7 +67,12 @@ function start() {
   const trackW = width + MARGIN * 2;
   // Dog size follows the window: 240px base on phones / small windows (the size
   // we tuned), growing gently on big screens but capped so dogs never get huge.
-  const baseW = () => Math.min(300, Math.max(240, width * 0.17));
+  // On phones (narrow screens) it scales down with the screen width so dogs stay
+  // in proportion instead of filling the whole screen.
+  const baseW = () =>
+    width < 650
+      ? Math.max(150, width * 0.37)
+      : Math.min(300, Math.max(240, width * 0.17));
   const total = Math.max(3, Math.min(Math.floor(trackW / (2 * baseW())), 6));
   const spacing = trackW / total;
   const SPEED = 1.1;                        // px per frame, same for everyone
@@ -64,7 +86,7 @@ function start() {
   for (let i = 0; i < total; i++) {
     const d = {
       x: -MARGIN + spacing * i,
-      y: height + 50 + Math.random() * 40,
+      off: 50 + Math.random() * 40, // how far below the bottom edge (feet are cropped)
       speed: SPEED,
       direction: 1,
       phase: Math.random() * Math.PI * 2,
@@ -106,7 +128,7 @@ function start() {
       }
 
       ctx.save();
-      ctx.translate(d.x, d.y - bounce);
+      ctx.translate(d.x, height + d.off - bounce);
       if (d.direction === -1) ctx.scale(-1, 1);
       ctx.rotate(sway);
       ctx.drawImage(s.img, frame * s.fw, 0, s.fw, s.fh, -d.w / 2, -h, d.w, h);
