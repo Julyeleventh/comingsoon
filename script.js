@@ -86,7 +86,7 @@ function start() {
   for (let i = 0; i < total; i++) {
     const d = {
       x: -MARGIN + spacing * i,
-      off: 50 + Math.random() * 40, // how far below the bottom edge (feet are cropped)
+      offR: 0.17 + Math.random() * 0.13, // how much of the dog sinks below the bottom edge (feet cropped), as a share of its height
       speed: SPEED,
       direction: 1,
       phase: Math.random() * Math.PI * 2,
@@ -128,7 +128,7 @@ function start() {
       }
 
       ctx.save();
-      ctx.translate(d.x, height + d.off - bounce);
+      ctx.translate(d.x, height + d.offR * h - bounce);
       if (d.direction === -1) ctx.scale(-1, 1);
       ctx.rotate(sway);
       ctx.drawImage(s.img, frame * s.fw, 0, s.fw, s.fh, -d.w / 2, -h, d.w, h);

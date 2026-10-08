@@ -32,7 +32,9 @@ body {
 }
 
 #crowd-canvas {
-  position: absolute;
+  /* fixed so it fills the whole screen, including behind Safari's glass toolbar
+     (no flat cut-off line above it); Chrome keeps it above its own toolbar */
+  position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
