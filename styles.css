@@ -32,22 +32,16 @@ body {
 }
 
 #crowd-canvas {
-  /* fixed so it fills the whole screen, including behind Safari's glass toolbar
-     (no flat cut-off line above it); Chrome keeps it above its own toolbar */
+  /* Fixed, and exactly as tall as the area that is ALWAYS visible (svh = the
+     smallest viewport, i.e. with the browser toolbars showing). Chrome, Safari and
+     the Instagram in-app browser all agree on this, so the dogs stand at the same
+     visible bottom edge in every one of them. */
   position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-/* iPhone Safari only: stretch the dogs' canvas to the full screen height so they
-   continue behind the glass toolbar instead of being cut off by a flat edge. */
-.ios-safari #crowd-canvas {
-  inset: auto;
   top: 0;
   left: 0;
+  width: 100%;
   height: 100vh;
-  height: 100lvh;
+  height: 100svh;
 }
 
 .cs-overlay {
@@ -87,6 +81,8 @@ body {
   color: var(--dark);
 }
 
+.cs-desc .nowrap { white-space: nowrap; }
+
 .cs-desc a {
   color: inherit;
   text-decoration: underline;
@@ -121,3 +117,14 @@ body {
 .cs-socials a:hover { transform: translateY(-3px); opacity: 0.85; }
 
 .cs-socials img { width: 100%; height: 100%; display: block; }
+
+/* Phones: tighter spacing so the text block stays clear of the dogs at the bottom */
+@media (max-width: 650px) {
+  .cs-overlay { padding-top: 5vh; }
+  .cs-logo { margin-bottom: 1.6rem; }
+  .cs-title { margin-bottom: 0.2rem; line-height: 1.1; }
+  .cs-desc { font-size: 0.9rem; line-height: 1.55; }
+  .cs-connect-title { margin-top: 1.3rem; }
+  .cs-socials { margin-top: 0.8rem; gap: 0.9rem; }
+  .cs-socials a { width: 46px; height: 46px; }
+}

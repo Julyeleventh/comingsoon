@@ -69,10 +69,6 @@ DOG_SPRITES.forEach((s) => {
   s.img.src = s.src;
 });
 
-// iPhone Safari: its canvas extends below the visible area (under the floating toolbar),
-// so the dogs' ground is lifted by this many px to stand where they can be seen.
-const GROUND_LIFT = isIosSafari ? 70 : 0;
-
 function start() {
   const SPRITES = DOG_SPRITES.filter((s) => s.ok);
   if (!SPRITES.length) return;
@@ -132,6 +128,9 @@ function start() {
       ctx.restore();
     }
 
+    // The dogs stand on the bottom edge of the canvas (= the always-visible area, see styles.css).
+    const ground = height;
+
     dogs.forEach((d) => {
       if (!reduceMotion) {
         d.x += d.speed;
@@ -161,7 +160,7 @@ function start() {
       }
 
       ctx.save();
-      ctx.translate(d.x, height - GROUND_LIFT + d.offR * h - bounce);
+      ctx.translate(d.x, ground + d.offR * h - bounce);
       if (d.direction === -1) ctx.scale(-1, 1);
       ctx.rotate(sway);
       ctx.drawImage(s.img, frame * s.fw, 0, s.fw, s.fh, -d.w / 2, -h, d.w, h);
