@@ -43,27 +43,39 @@ if (window.ResizeObserver) {
 // Each dog is a horizontal strip of equal-width frames (all facing right).
 // frames: 1 = single pose (gets a bounce), >1 = real walk cycle.
 const DOG_SPRITES = [
-  { src: 'assets/dog-walk.png', frames: 4, scale: 0.85 }, // black dog
-  { src: 'assets/dog-walk-white.png', frames: 4, scale: 0.85 }, // white dog, same size as black
-  { src: 'assets/dog-walk-dachshund.png', frames: 4, scale: 0.97 }, // long dog, scaled up to match visually
-  { src: 'assets/dog-walk-golden.png', frames: 4, scale: 1.55 }, // golden retriever (flipped to face right)
-  { src: 'assets/dog-walk-chihuahua.png', frames: 4, scale: 0.72 }, // chihuahua (flipped to face right)
-  { src: 'assets/dog-walk-lab.png', frames: 4, scale: 1.46 }, // labrador, same rendered height as the golden
-  { src: 'assets/dog-walk-frenchie.png', frames: 4, scale: 0.69 }, // french bulldog, same rendered height as the chihuahua
+  { src: 'assets/dog-walk.webp', frames: 4, scale: 0.85 }, // black dog
+  { src: 'assets/dog-walk-white.webp', frames: 4, scale: 0.85 }, // white dog, same size as black
+  { src: 'assets/dog-walk-dachshund.webp', frames: 4, scale: 0.97 }, // long dog, scaled up to match visually
+  { src: 'assets/dog-walk-golden.webp', frames: 4, scale: 1.55 }, // golden retriever (flipped to face right)
+  { src: 'assets/dog-walk-chihuahua.webp', frames: 4, scale: 0.72 }, // chihuahua (flipped to face right)
+  { src: 'assets/dog-walk-lab.webp', frames: 4, scale: 1.46 }, // labrador, same rendered height as the golden
+  { src: 'assets/dog-walk-frenchie.webp', frames: 4, scale: 0.69 }, // french bulldog, same rendered height as the chihuahua
 ];
 
-let loaded = 0;
+// Start as soon as every sprite has either loaded or failed. A sprite that fails
+// to load is skipped, so one missing file can never make all the dogs disappear.
+let settled = 0;
 DOG_SPRITES.forEach((s) => {
   s.img = new Image();
   s.img.onload = () => {
     s.fw = s.img.width / s.frames;
     s.fh = s.img.height;
-    if (++loaded === DOG_SPRITES.length) start();
+    s.ok = true;
+    if (++settled === DOG_SPRITES.length) start();
+  };
+  s.img.onerror = () => {
+    if (++settled === DOG_SPRITES.length) start();
   };
   s.img.src = s.src;
 });
 
+// iPhone Safari: its canvas extends below the visible area (under the floating toolbar),
+// so the dogs' ground is lifted by this many px to stand where they can be seen.
+const GROUND_LIFT = isIosSafari ? 70 : 0;
+
 function start() {
+  const SPRITES = DOG_SPRITES.filter((s) => s.ok);
+  if (!SPRITES.length) return;
   // Dogs all walk the same direction at the same speed on a looping track, so
   // they stay evenly spaced and never bunch up or overlap. Each time a dog
   // loops back to the start it becomes the next breed in the list, so all
@@ -85,7 +97,7 @@ function start() {
   const dogs = [];
 
   function assign(d) {
-    d.sprite = DOG_SPRITES[nextSprite++ % DOG_SPRITES.length];
+    d.sprite = SPRITES[nextSprite++ % SPRITES.length];
   }
 
   for (let i = 0; i < total; i++) {
@@ -103,8 +115,22 @@ function start() {
     dogs.push(d);
   }
 
+  const DEBUG = /[?&]debug\b/.test(location.search);
+
   function render(now) {
     ctx.clearRect(0, 0, width, height);
+
+    if (DEBUG) {
+      ctx.save();
+      ctx.fillStyle = '#d00';
+      ctx.font = '14px monospace';
+      [
+        `canvas ${width}x${height}  innerH ${window.innerHeight}  dpr ${window.devicePixelRatio}`,
+        `iosSafari ${isIosSafari}  dogs ${dogs.length}  sprites ok ${SPRITES.length}/${DOG_SPRITES.length}`,
+        `x: ${dogs.map((d) => Math.round(d.x)).join(', ')}`,
+      ].forEach((t, i) => ctx.fillText(t, 8, 150 + i * 18));
+      ctx.restore();
+    }
 
     dogs.forEach((d) => {
       if (!reduceMotion) {
@@ -135,7 +161,7 @@ function start() {
       }
 
       ctx.save();
-      ctx.translate(d.x, height + d.offR * h - bounce);
+      ctx.translate(d.x, height - GROUND_LIFT + d.offR * h - bounce);
       if (d.direction === -1) ctx.scale(-1, 1);
       ctx.rotate(sway);
       ctx.drawImage(s.img, frame * s.fw, 0, s.fw, s.fh, -d.w / 2, -h, d.w, h);
