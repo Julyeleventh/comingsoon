@@ -1,0 +1,11 @@
+.DS_Store
+node_modules/
+*.command
+*.md
+build.py
+_待备份后删除/
+Thumbs.db
+*.log
+.env
+*.key
+*.pem

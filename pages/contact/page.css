@@ -1,0 +1,73 @@
+/* Contact page only */
+/* ==========================================================================
+   Contact page
+   ========================================================================== */
+.contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-6); margin: var(--nav-h) var(--fm) var(--fm); min-height: calc(100vh - var(--nav-h) - var(--fm)); }
+.contact__left { display: flex; align-items: flex-start; justify-content: center; padding: clamp(40px, 6vw, 96px) var(--page-inset); }
+.contact__content { width: 100%; max-width: 560px; display: grid; gap: var(--space-8); }
+.contact__media { position: relative; min-height: 420px; border-radius: var(--r-card); overflow: hidden; }
+.contact__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; display: block; }
+.contact h1 { font-size: var(--fs-h1-page); font-weight: 800; line-height: 1.05; color: var(--c-headline); }
+.contact__sub { margin-top: var(--space-6); max-width: none; font-size: var(--fs-lead); line-height: 1.5; color: var(--c-sub); }
+.contact__list { list-style: none; margin-top: 0; max-width: none; border-top: 1px solid rgba(51,43,35,.15); }
+.contact__row { display: flex; align-items: center; gap: var(--space-4); padding: var(--row-pad) 0; border-bottom: 1px solid rgba(51,43,35,.15); font-size: var(--fs-lead); color: var(--c-headline); }
+.contact__row a { transition: color var(--dur-fast) var(--ease); }
+@media (hover: hover) { .contact__row a:hover {color: var(--beige-700);} }
+.contact__icon svg { display: block; width: var(--icon-md); height: var(--icon-md); }
+.contact__label { margin-right: var(--space-1); }
+.contact__icons { display: flex; gap: var(--space-4); }
+.contact__icons a { display: flex; color: var(--c-headline); transition: color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease); }
+@media (hover: hover) { .contact__icons a:hover {color: var(--beige-700); transform: translateY(-2px);} }
+.contact__icons svg { width: var(--icon-md); height: var(--icon-md); }
+
+/* form: the site's own fields (cream, soft corners, label rides up when filled) */
+.contact__form { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+.field { position: relative; grid-column: 1 / -1; }
+.field--half { grid-column: auto; }
+.contact__actions { grid-column: 1 / -1; display: flex; justify-content: flex-end; align-items: center; gap: var(--space-5); margin-top: var(--space-1); }
+.contact__thanks { margin-right: auto; font-size: var(--fs-body); color: var(--green-700); }
+.contact__thanks[hidden] { display: none; }
+.contact__actions .btn { border: 0; cursor: pointer; min-width: 140px; }
+@media (hover: hover) { .btn--primary:hover {background: var(--brown-500);} }
+
+@media (max-width: 599px) {
+  .contact { grid-template-columns: 1fr; min-height: 0; }
+  .contact__media { min-height: 0;}
+}
+@media (max-width: 599px) {
+  .contact__form { grid-template-columns: 1fr; }
+}
+
+.btn.is-tracking, .sub.is-tracking { will-change: transform; }
+
+/* nav: plain solid white, no glass or blur (glass on a fixed bar can blank the page while scrolling) */
+.nav, .nav.is-liquid { -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+/* input fields: tighter corners (button inside 6px) */
+.sub__field { border-radius: var(--r-sm); }
+.contact__actions .btn { border-radius: var(--r-sm); }
+
+.field--captcha { min-height: 78px; }
+.contact__error { margin-right: auto; font-size: 15px; color: var(--red); }
+.contact__error[hidden] { display: none; }
+
+/* all CTA buttons: same corner as the Subscribe button (6px) */
+
+/* all CTA buttons: fully rounded left and right ends (pill) */
+.btn, .btn--primary, .btn--secondary, .sub__field .btn, .contact__actions .btn { border-radius: var(--r-pill); }
+
+/* CONTACT, compact layout (599px and below, phones): picture first, then the text, the form and the contact list. */
+@media (max-width: 599px) {
+  .contact { gap: var(--space-6); }
+  .contact__media { order: -1; aspect-ratio: var(--ar-wide); }
+  .contact__media img { object-position: 50% 36%; }
+  .contact__left { padding: 0 0 var(--space-8); }
+  .contact__content { gap: var(--space-7); }
+}
+/* CONTACT ON PHONES (599px and below): page title is hero size (28px), subtitle 16px with an 8px gap, rows 16px, 16px between fields. */
+@media (max-width: 599px) {
+  .contact h1 { font-size: var(--fs-h1); line-height: 1.25; }
+  .contact__sub { margin-top: var(--space-2); font-size: var(--fs-body); }
+  .contact__form { gap: var(--space-4); }
+  .contact__row { font-size: var(--fs-body); }
+}

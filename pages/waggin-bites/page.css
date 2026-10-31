@@ -1,0 +1,23 @@
+/* Waggin' Bites only */
+.board { position: relative;margin: var(--space-8) auto 0; container-type: inline-size; --pad: max(7px, 1.6cqw); --hp: max(3px, .53cqw); --dotsz: max(12px, 2.4cqw); --fs: clamp(11px, calc(2.9cqw - 2px), 20px); }
+
+.wrapped__prod { display: flex; align-items: center; gap: var(--space-4); margin-top: var(--space-3); padding: var(--space-2); background: var(--surface); border-radius: var(--r-card); color: inherit; text-decoration: none; box-shadow: var(--shadow-sm); }
+
+/* Chicken / Rabbit selector above the product card, left-aligned (icon + meat name) */
+.wrapped__tabs { display: flex; justify-content: flex-start; margin-top: var(--space-6); }
+
+.mtabs { display: inline-flex; gap: var(--space-1); padding: var(--space-1); background: rgba(255,255,255,.55); -webkit-backdrop-filter: blur(14px) saturate(1.5); backdrop-filter: blur(14px) saturate(1.5); border: 1px solid rgba(255,255,255,.75); border-radius: var(--r-pill); box-shadow: var(--shadow-sm); }
+
+.mtab { display: inline-flex; align-items: center; border: 0; background: none; padding: var(--space-2) var(--space-4); border-radius: var(--r-pill); font: 500 var(--fs-sm) var(--f-body); color: var(--c-sub); cursor: pointer; }
+
+.mtab.is-active { background: var(--c-primary); color: var(--c-cream); font-weight: 600; }
+
+/* ingredients board + dried-fruit layer: whole thing 20% smaller (756px -> 605px) */
+.board { max-width: 605px; }
+
+@media (prefers-reduced-motion: reduce) { .hero__brand::before, .hero__brand::after { animation: none; transform: rotate(var(--rot)) scaleX(1); } }
+
+/* Hero video on phones: the picture sits 16% of the frame height (about 80px) lower. The 4:5 frame is already filled edge to edge, so to move it down without a gap at the top it is scaled 16.5% from the bottom edge. */
+@media (max-width: 599px) {
+  .hero__img.hero__video { transform: translateY(16%) scale(1.165); transform-origin: 50% 100%; }
+}

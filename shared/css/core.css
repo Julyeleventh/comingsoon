@@ -1,0 +1,873 @@
+/* CORE: tokens, base, buttons, liquid glass, nav, footer. Used by every page. Do not put page content styles here. */
+/* ==========================================================================
+   Waggin' Bites product page.
+   All values come from the tokens below, so a design system can replace
+   them in one place later.
+   ========================================================================== */
+:root {
+  /* ===== Brand palette (from Figma). Primary = dark-brown-500 + light-beige-500; secondary = brown-500 + beige-500 ===== */
+  --brown-100: #dbd9d6;
+  --brown-200: #b7b2ad;
+  --brown-300: #928c85;
+  --brown-400: #6e655c;
+  --brown-500: #4a3f33;
+  --brown-600: #3b3229;
+  --brown-700: #2c261f;
+  --brown-800: #1e1914;
+  --brown-900: #0f0d0a;
+  --dark-brown-100: #d6d5d3;
+  --dark-brown-200: #adaaa7;
+  --dark-brown-300: #85807b;
+  --dark-brown-400: #5c554f;
+  --dark-brown-500: #332b23;
+  --dark-brown-600: #29221c;
+  --dark-brown-700: #1f1a15;
+  --dark-brown-800: #14110e;
+  --dark-brown-900: #0a0907;
+  --beige-100: #fbf7f1;
+  --beige-200: #f7efe2;
+  --beige-300: #f2e8d4;
+  --beige-400: #eee0c5;
+  --beige-500: #ead8b7;
+  --beige-600: #bbad92;
+  --beige-700: #8c826e;
+  --beige-800: #5e5649;
+  --beige-900: #2f2b25;
+  --light-beige-100: #fbf7f1;
+  --light-beige-200: #f7efe2;
+  --light-beige-300: #fcf8f1;
+  --light-beige-400: #fbf6ec;
+  --light-beige-500: #faf4e7;
+  --light-beige-600: #c8c3b9;
+  --light-beige-700: #96928b;
+  --light-beige-800: #64625c;
+  --light-beige-900: #32312e;
+  --white: #ffffff;
+  /* Orange (hero highlight band) */
+  --orange-100: #fdf8f6;
+  --orange-200: #f9e3da;
+  --orange-300: #f1c1ab;
+  --orange-400: #e5916b;
+  --orange-500: #d75317;
+  --orange-600: #ac4212;
+  --orange-700: #81320e;
+  --orange-800: #562109;
+  --orange-900: #2b1105;
+  --orange: var(--orange-500);
+  --red-100: #fef7f6;
+  --red-200: #fdded9;
+  --red-300: #fab5aa;
+  --red-400: #f57c69;
+  --red-500: #ef3215;
+  --red-600: #bf2811;
+  --red-700: #901e0c;
+  --red-800: #300a04;
+  --red-900: #260803;
+  --red: var(--red-500);
+  --green-100: #e4f4d5;
+  --green-200: #c8eaab;
+  --green-300: #addf81;
+  --green-400: #91d557;
+  --green-500: #76ca2d;
+  --green-600: #5ea224;
+  --green-700: #47791b;
+  --green-800: #2f5112;
+  --green-900: #182809;
+  /* ===== Ingredient colours (500 = Figma base; 100-400 tints, 600-900 shades follow the brand-palette steps) ===== */
+  --chicken-100: #fcfaf7;
+  --chicken-200: #f4ebe0;
+  --chicken-300: #e6d2b9;
+  --chicken-400: #d2ae82;
+  --chicken-500: #b9813c;
+  --chicken-600: #946730;
+  --chicken-700: #6f4d24;
+  --chicken-800: #4a3418;
+  --chicken-900: #251a0c;
+  --chicken: var(--chicken-500);
+  --beef-100: #fdf8f7;
+  --beef-200: #f8e2de;
+  --beef-300: #eebeb4;
+  --beef-400: #e28c79;
+  --beef-500: #d14b2e;
+  --beef-600: #a73c25;
+  --beef-700: #7d2d1c;
+  --beef-800: #541e12;
+  --beef-900: #2a0f09;
+  --beef: var(--beef-500);
+  --rabbit-100: #fcfaf9;
+  --rabbit-200: #f4eae8;
+  --rabbit-300: #e7cfcb;
+  --rabbit-400: #d5a9a2;
+  --rabbit-500: #bd796e;
+  --rabbit-600: #976158;
+  --rabbit-700: #714942;
+  --rabbit-800: #4c302c;
+  --rabbit-900: #261816;
+  --rabbit: var(--rabbit-500);
+  --duck-100: #fdf8f7;
+  --duck-200: #f5e5df;
+  --duck-300: #e9c4b8;
+  --duck-400: #d89781;
+  --duck-500: #c25c3a;
+  --duck-600: #9b4a2e;
+  --duck-700: #743723;
+  --duck-800: #4e2517;
+  --duck-900: #27120c;
+  --duck: var(--duck-500);
+  --goat-cheese-100: #fcfbf6;
+  --goat-cheese-200: #f4eddc;
+  --goat-cheese-300: #e7d7b1;
+  --goat-cheese-400: #d3b975;
+  --goat-cheese-500: #bb9127;
+  --goat-cheese-600: #96741f;
+  --goat-cheese-700: #705717;
+  --goat-cheese-800: #4b3a10;
+  --goat-cheese-900: #251d08;
+  --goat-cheese: var(--goat-cheese-500);
+  --mushroom-100: #f9f8f8;
+  --mushroom-200: #e6e3e1;
+  --mushroom-300: #c6c0bc;
+  --mushroom-400: #998e88;
+  --mushroom-500: #604f45;
+  --mushroom-600: #4d3f37;
+  --mushroom-700: #3a2f29;
+  --mushroom-800: #26201c;
+  --mushroom-900: #13100e;
+  --mushroom: var(--mushroom-500);
+  --pumpkin-100: #fdfaf5;
+  --pumpkin-200: #f7ead9;
+  --pumpkin-300: #edcfa9;
+  --pumpkin-400: #e0ab67;
+  --pumpkin-500: #ce7b11;
+  --pumpkin-600: #a5620e;
+  --pumpkin-700: #7c4a0a;
+  --pumpkin-800: #523107;
+  --pumpkin-900: #291903;
+  --pumpkin: var(--pumpkin-500);
+  /* ===== Other ingredient colours currently used on the site (500 = site value today) ===== */
+  --egg-100: #fefdf8;
+  --egg-200: #fdf5e2;
+  --egg-300: #fae9be;
+  --egg-400: #f5d88c;
+  --egg-500: #f0c24b;
+  --egg-600: #c09b3c;
+  --egg-700: #90742d;
+  --egg-800: #604e1e;
+  --egg-900: #30270f;
+  --egg: var(--egg-500);
+  --oat-100: #fefefb;
+  --oat-200: #fdf9f0;
+  --oat-300: #faf2dd;
+  --oat-400: #f6e9c2;
+  --oat-500: #f1dca0;
+  --oat-600: #c1b080;
+  --oat-700: #918460;
+  --oat-800: #605840;
+  --oat-900: #302c20;
+  --oat: var(--oat-500);
+  --coconut-oil-100: #fdfdfc;
+  --coconut-oil-200: #f9f7f3;
+  --coconut-oil-300: #f1eee4;
+  --coconut-oil-400: #e7e0cf;
+  --coconut-oil-500: #d9cfb4;
+  --coconut-oil-600: #aea690;
+  --coconut-oil-700: #827c6c;
+  --coconut-oil-800: #575348;
+  --coconut-oil-900: #2b2924;
+  --coconut-oil: var(--coconut-oil-500);
+  --goat-milk-powder-100: #fefefd;
+  --goat-milk-powder-200: #fbfaf6;
+  --goat-milk-powder-300: #f7f3ec;
+  --goat-milk-powder-400: #f0ebdc;
+  --goat-milk-powder-500: #e8dfc9;
+  --goat-milk-powder-600: #bab2a1;
+  --goat-milk-powder-700: #8b8679;
+  --goat-milk-powder-800: #5d5950;
+  --goat-milk-powder-900: #2e2d28;
+  --goat-milk-powder: var(--goat-milk-powder-500);
+  --strawberry-100: #fef8f5;
+  --strawberry-200: #fbe2d8;
+  --strawberry-300: #f7bda8;
+  --strawberry-400: #f08965;
+  --strawberry-500: #e8470e;
+  --strawberry-600: #ba390b;
+  --strawberry-700: #8b2b08;
+  --strawberry-800: #5d1c06;
+  --strawberry-900: #2e0e03;
+  --strawberry: var(--strawberry-500);
+  --blueberry-100: #f6f5f5;
+  --blueberry-200: #d9d9d8;
+  --blueberry-300: #aaa9a8;
+  --blueberry-400: #696765;
+  --blueberry-500: #14110e;
+  --blueberry-600: #100e0b;
+  --blueberry-700: #0c0a08;
+  --blueberry-800: #080706;
+  --blueberry-900: #040303;
+  --blueberry: var(--blueberry-500);
+  --butterfly-pea-100: #fafbfc;
+  --butterfly-pea-200: #edf0f4;
+  --butterfly-pea-300: #d6dee5;
+  --butterfly-pea-400: #b7c5d2;
+  --butterfly-pea-500: #8ea4b8;
+  --butterfly-pea-600: #728393;
+  --butterfly-pea-700: #55626e;
+  --butterfly-pea-800: #39424a;
+  --butterfly-pea-900: #1c2125;
+  --butterfly-pea: var(--butterfly-pea-500);
+  --wheatgrass-100: #fafbf8;
+  --wheatgrass-200: #eaf0e2;
+  --wheatgrass-300: #cfddbe;
+  --wheatgrass-400: #aac28b;
+  --wheatgrass-500: #7aa04a;
+  --wheatgrass-600: #62803b;
+  --wheatgrass-700: #49602c;
+  --wheatgrass-800: #31401e;
+  --wheatgrass-900: #18200f;
+  --wheatgrass: var(--wheatgrass-500);
+  --purple-sweet-potato-100: #fbfafc;
+  --purple-sweet-potato-200: #efeaf2;
+  --purple-sweet-potato-300: #dbcfe3;
+  --purple-sweet-potato-400: #beabcc;
+  --purple-sweet-potato-500: #9a7bb0;
+  --purple-sweet-potato-600: #7b628d;
+  --purple-sweet-potato-700: #5c4a6a;
+  --purple-sweet-potato-800: #3e3146;
+  --purple-sweet-potato-900: #1f1923;
+  --purple-sweet-potato: var(--purple-sweet-potato-500);
+  --beetroot-100: #fdfafb;
+  --beetroot-200: #f9ecef;
+  --beetroot-300: #f1d5db;
+  --beetroot-400: #e7b4be;
+  --beetroot-500: #d98a9a;
+  --beetroot-600: #ae6e7b;
+  --beetroot-700: #82535c;
+  --beetroot-800: #57373e;
+  --beetroot-900: #2b1c1f;
+  --beetroot: var(--beetroot-500);
+  /* Shadows (primary colour + alpha) */
+  --shadow-sm: 0 2px 12px rgba(51,43,35,.06);
+  --shadow-md: 0 8px 26px rgba(51,43,35,.14);
+  --shadow-lg: 0 12px 40px rgba(51,43,35,.12);
+  --primary-dark: var(--dark-brown-500);
+  --primary-light: var(--light-beige-500);
+  --secondary-dark: var(--brown-500);
+  --secondary-light: var(--beige-500);
+  /* colour (Figma variables) */
+  --c-headline: var(--dark-brown-500);  --c-primary: var(--dark-brown-500);
+  --c-cream: var(--light-beige-500);
+  --c-link: #2c5fa6; /* hyperlinks: blue, underlined (contrast 6.4 on white) */
+  --c-link-hover: #1d447a;
+  --c-hover: var(--light-beige-300); /* row hover background, see HOVER RULES below */
+  --c-hover-deep: var(--light-beige-200); /* one step deeper than --c-hover: hover on an accordion card */
+  --c-page: #fdf9f1;
+  --c-white: #fff;
+  --c-green: var(--green-500);
+  --c-dark: var(--dark-brown-500);
+  /* type */
+  --f-head: 'Outfit', system-ui, sans-serif;
+  --f-body: 'Inter', system-ui, sans-serif;
+  /* shape */
+  --r-pill: 999px;
+  --r-card: 15px;
+  /* Type scale */
+  --fs-h1: clamp(26px, 3.7vw, 48px);
+  --fs-h1-page: clamp(44px, 6vw, 80px);
+  --row-pad: var(--space-5); /* top and bottom padding of every list row: FAQ question, contact row, category row (desktop 20px, phones 16px) */
+  --page-inset: max(clamp(16px, 4vw, 64px), env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px)); /* left/right inside page-wide bars and big cards */
+  --bar-h: 0px; /* height of the announcement bar above the nav: 0 when a page has none; 36px when the page contains an .announce (see ANNOUNCEMENT BAR) */
+  --nav-h: calc(72px + var(--bar-h)); /* everything fixed at the top: announcement bar + nav bar. Page content starts below it. */
+  --measure: 65ch; /* widest a paragraph may be; subtitles max 640px */
+  --gap-sub: 10px; /* headline to its subtitle (desktop 10px, phones 8px) */
+  --gap-head: var(--space-11); /* headline block (headline + subtitle) to the content right under it (desktop 64px, phones 24px) */
+  --gap-section: var(--space-11); /* between big sections (desktop 64px, phones 40px) */
+  --gap-section-bg: var(--space-12); /* before and after a big section with its own background, class sec-bg (96px) */
+  --fs-h2: clamp(26px, 3vw, 36px);
+  --fs-h2-sm: clamp(28px, 2.3vw, 36px);
+  --fs-h3: clamp(22px, 2vw, 28px);
+  --fs-title: 22px;
+  --fs-subtitle: 20px;
+  --fs-lead: 18px;
+  --fs-body: 16px;
+  --fs-sm: 14px;
+  --fs-xs: 13px;
+  --fs-2xs: 11px;
+  /* Motion */
+  --dur-track: .12s;
+  --dur-fast: .2s;
+  --dur-base: .3s;
+  --dur-slow: .5s;
+  --dur-open: .4s; /* every open/close (accordion, categories, menus, ingredient points) */
+  --ease-open: cubic-bezier(.4, 0, .2, 1); /* smooth start and stop */
+  --ease: ease;
+  --ease-out: cubic-bezier(.22, .8, .3, 1);
+  /* Off-scale spacing kept as is (named so they are part of the system) */
+  /* Component spacing */
+  --card-pad: var(--space-8); /* inside a rounded card: 40px desktop, 20px phones. Cards inside cards use --space-5 */
+  --ar-wide: 2 / 1; /* wide picture: Hero and Contact on desktop, Contact on phones */
+  --ar-std: 3 / 2; /* standard picture: Story, order block */
+  --ar-tall: 4 / 5; /* tall picture: Hero on phones (room for headline, name, subtitle and button) */
+  --overlay-dark: rgba(74, 63, 51, .7); /* mask over a photo so white text reads (Hero, Contact) */
+  --surface: #fff; /* white blocks: page background, cards, nav, tabs */
+  --surface-95: rgba(255,255,255,.95);
+  --glass: rgba(255,255,255,.6); /* floating label or card on a picture */
+  --glass-soft: rgba(255,255,255,.3); /* faint layer inside a card (Rabbit points) */
+  --glass-blur: 8px;
+  --icon-lg: 48px; /* trust strip, Feature */
+  --icon-md: 24px; /* Contact, social */
+  --icon-sm: 16px; /* accordion plus, arrows */
+  --gap-features: 44px 58px;
+  --btn-pad-x: 28px;
+  --field-h: 64px; /* input field height (56px on phones) */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-circle: 50%;
+  /* Spacing scale (4/8 base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-9: 48px;
+  --space-10: 56px;
+  --space-11: 64px;
+  --space-12: 96px;
+  --fm: 12px;
+  --w-max: 1200px;
+  --w-page: 100000px; /* no maximum: the page follows the browser window. Set a number (e.g. 1920px) to stop the hero, footer and wide cards from growing past it */
+  --edge: max(var(--fm), calc((100% - var(--w-page)) / 2)); /* side margin of those full-width blocks: 12px, more on screens wider than --w-page */
+}
+
+/* DARK THEME (night mode). Switched by <html data-theme="dark"> (button in the nav, choice kept in localStorage). Only semantic colours change here; pictures, hero, footer and the dark overlay stay as they are. */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --surface: #262019;
+  --surface-95: rgba(38,32,25,.95);
+  --c-page: #1d1813;
+  --c-headline: #f4ead8;
+  --c-primary: #f4ead8;
+  --c-dark: #f4ead8;
+  --c-sub: #cdbfa8;
+  --c-cream: #322a21;
+  --c-hover: #2f2820;
+  --c-hover-deep: #382f26;
+  --c-link: #8db4ec;
+  --c-link-hover: #b4cdf3;
+  --glass: rgba(38,32,25,.6);
+  --glass-soft: rgba(38,32,25,.35);
+  --beige-100: #2a231c;
+  --beige-200: #2f2820;
+  --beige-300: #3a3125;
+  --beige-400: #443a2c;
+  --beige-500: #54483a;
+  --beige-700: #a89c85;
+  --beige-800: #c9bda6;
+  --brown-500: #e2d6bf;
+  --shadow-sm: 0 2px 12px rgba(0,0,0,.35);
+  --shadow-md: 0 6px 22px rgba(0,0,0,.4);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,.45);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+
+body { background: var(--surface); color: var(--c-sub); font: 400 var(--fs-body)/1.5 var(--f-body); -webkit-font-smoothing: antialiased; }
+
+img { display: block; max-width: 100%; height: auto; }
+
+a { color: inherit; text-decoration: none; }
+
+h1, h2, h3 { font-family: var(--f-head); color: var(--c-headline); line-height: 1.25; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: var(--space-4) var(--space-7); border-radius: var(--r-pill); font: 600 var(--fs-body)/1 var(--f-body);}
+
+.btn--primary { background: var(--c-primary); color: var(--c-cream); }
+
+.btn--secondary { background: var(--c-cream); color: var(--c-primary); }
+/* padding is 2px smaller than other buttons to make up for the 2px border */
+.btn--outline { background: transparent; color: var(--c-primary); border: 2px solid var(--c-primary); padding: 14px 30px; }
+@media (hover: hover) { .btn--outline:hover {background: var(--c-primary); color: var(--c-cream);} }
+.btn--outline.on-dark { color: var(--c-cream); border-color: var(--c-cream); }
+@media (hover: hover) { .btn--outline.on-dark:hover {background: var(--c-cream); color: var(--c-primary);} }
+
+/* nav */
+.nav { position: fixed; z-index: 10; inset: 0 0 auto 0; display: flex; align-items: center; justify-content: space-between; padding: var(--space-2) max(var(--page-inset), calc((100% - var(--w-page)) / 2 + var(--page-inset))); background: var(--surface); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 0; box-shadow: none; }
+
+.nav__logo img { width: auto; height: 60px; margin: -4px 0; object-fit: contain; }
+
+.nav__links { display: flex; gap: clamp(16px, 3.6vw, 56px); font-size: var(--fs-sm); }
+
+.nav__links a { color: var(--brown-500); opacity: 1; font-weight: 400; }
+
+.nav__links a { transition: color var(--dur-fast) var(--ease); }
+
+@media (hover: hover) { .nav__links a:not([aria-current="page"]):hover {color: var(--beige-700);} }
+
+.nav__links a[aria-current="page"] { opacity: 1; font-weight: 700; color: var(--dark-brown-500); }
+
+.nav .btn { padding: var(--space-3) var(--space-4); font-size: var(--fs-sm); }
+
+/* Products dropdown */
+.nav__dd { position: relative; display: flex; align-items: center; }
+
+.nav__dd::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 16px; }
+
+.nav__dd-btn { display: inline-flex; align-items: center; gap: var(--space-1); }
+
+.nav__dd-btn svg { width: 10px; height: 6px; transition: transform var(--dur-fast) var(--ease); }
+
+.nav__dd-btn { background: none; border: 0; padding: 0; margin: 0; font: inherit; color: var(--brown-500); cursor: pointer; }
+
+.nav__dd-btn[aria-current="page"] { font-weight: 700; color: var(--dark-brown-500); }
+
+.nav__dd.is-open .nav__menu { opacity: 1; visibility: visible; transform: translate(0, 0); }
+
+.nav__dd.is-open .nav__dd-btn svg { transform: rotate(180deg); }
+
+.nav__menu { position: absolute; top: calc(100% + 12px); left: 0; min-width: 190px; padding: var(--space-2); display: flex; flex-direction: column; gap: var(--space-1); background: var(--surface); border-radius: var(--r-card);opacity: 0; visibility: hidden; transform: translate(0, 6px); transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), visibility var(--dur-fast); }
+
+ .nav__dd:focus-within .nav__menu {opacity: 1; visibility: visible; transform: translate(0, 0);}
+@media (hover: hover) { .nav__dd:hover .nav__menu {opacity: 1; visibility: visible; transform: translate(0, 0);} }
+
+ .nav__dd:focus-within .nav__dd-btn svg {transform: rotate(180deg);}
+@media (hover: hover) { .nav__dd:hover .nav__dd-btn svg {transform: rotate(180deg);} }
+
+.nav__menu .nav__thumb { width: var(--space-12); height: var(--space-12); flex: none; object-fit: cover; border-radius: var(--r-md); }
+.nav__menu a { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-4) var(--space-2) var(--space-2); border-radius: var(--r-md); white-space: nowrap; transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
+
+@media (hover: hover) { .nav__menu a:hover {background: var(--c-hover);} }
+
+@media (prefers-reduced-motion: reduce) {  .nav__menu, .nav__dd-btn svg { transition: none; }
+}
+
+/* on dark sections the primary CTA inverts so it stays visible */
+.sub__field .btn--primary { background: var(--dark-brown-500); color: var(--light-beige-500); }
+
+/* footer: 1728 x 673 in Figma (bar 92px) */
+.crumbs { margin: 0; padding: var(--space-4) calc(var(--edge) - var(--fm) + var(--page-inset)); /* lines up with the footer content, also on screens wider than --w-page */ font-size: var(--fs-sm); }
+
+.crumbs span { color: var(--c-headline); font-weight: 600; }
+
+.footer { --fpad: max(12px, calc(var(--page-inset) - var(--fm))); margin: 0 var(--edge) var(--fm); border-radius: var(--r-card); background: var(--dark-brown-800); color: var(--light-beige-600); overflow: hidden; }
+
+.footer__inner { position: relative; height: 501px; margin: 0 auto; }
+
+.footer__logo { position: absolute; left: var(--fpad); top: 114px; width: 114px; height: auto; object-fit: contain; }
+
+.footer__brand { position: absolute; left: var(--fpad); top: 278px; width: 306px; }
+
+.footer__name { font-family: var(--f-head); line-height: 1.25; color: var(--light-beige-500); font-size: var(--fs-lead); font-weight: 600; margin-bottom: var(--space-2); }
+
+.footer__tag { font-size: var(--fs-sm); line-height: 20px; color: var(--light-beige-500); }
+
+.footer__social { position: absolute; left: var(--fpad); top: 370px; display: flex; gap: var(--space-4); }
+
+.footer__social a { display: flex; color: var(--light-beige-500); opacity: 1; }
+
+.footer__social a { transition: color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease); }
+
+@media (hover: hover) { .footer__social a:hover {color: var(--white); transform: translateY(-2px);} }
+
+.footer__social svg { width: 31px; height: 31px; }
+
+.sub { position: absolute; right: var(--fpad); top: 70px; width: 33.1%; min-width: 520px; padding: var(--space-7) var(--space-7) 0; height: 205px; border: 0; border-radius: var(--r-card); background: linear-gradient(135deg, rgba(0,0,0,.4), rgba(0,0,0,.18) 55%, rgba(255,255,255,.04)); box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+
+.sub__title { display: flex; gap: var(--space-3); align-items: center; color: var(--white); font: 400 var(--fs-lead)/1.6 var(--f-head); }
+
+.sub__title svg { width: 54px; height: 54px; flex: none; margin: -7px; overflow: visible; }
+
+.sub__field { display: flex; gap: var(--space-2); margin-top: var(--space-5); padding: var(--space-1) var(--space-1) var(--space-1) var(--space-4); height: 57px; align-items: center;background: rgba(255,255,255,.4); }
+
+.sub__field input { flex: 1; min-width: 0; border: 0; background: none; color: var(--light-beige-500); font: 14px var(--f-body); }
+
+.sub__field input::placeholder { color: var(--beige-300); }
+
+.sub__field input:focus, .sub__field input:focus-visible { outline: none; }
+
+.sub__field .btn { border: 0; cursor: pointer; height: 48px; padding: 0 var(--btn-pad-x); font-size: var(--fs-body); }
+
+.cols { position: absolute; right: var(--fpad); top: 314px; width: 33.1%; min-width: 520px; display: grid; grid-template-columns: repeat(4, max-content); column-gap: var(--space-10); }
+
+.cols__h { font-family: var(--f-head); color: var(--white); font-size: var(--fs-sm); font-weight: 600; line-height: 23px; margin-bottom: var(--space-2); }
+
+.cols a { display: block; height: 20px; margin-bottom: var(--space-4); font-size: var(--fs-xs); line-height: 20px;white-space: nowrap; }
+
+.cols a { transition: color var(--dur-fast) var(--ease); }
+
+@media (hover: hover) { .cols a:hover {color: var(--white);} }
+
+.footer__inner::after { content: ""; position: absolute; inset: auto 0 0 0; max-width: 1728px; margin: 0 auto; aspect-ratio: 1739 / 256; transform: translateY(11.72%); background: url(../brand/footer-dogs.svg?v=5) no-repeat center bottom / 100% auto; pointer-events: none; z-index: 0; }
+
+.footer__inner > * { z-index: 1; }
+
+.footer__bar { position: relative; z-index: 1; background: var(--dark-brown-700); height: 92px; padding: 0 var(--fpad); display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); font-size: var(--fs-2xs); color: var(--light-beige-600); }
+
+.legal { display: flex; gap: var(--space-2); }
+
+.legal span { opacity: .5; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (max-width: 1280px) {  .footer__inner { height: auto; display: flex; flex-direction: column; gap: var(--space-7); padding: var(--space-10) var(--fpad) var(--space-12); }
+  .footer__logo, .footer__brand, .footer__social, .sub, .cols { position: relative; left: auto; right: auto; top: auto; width: auto; min-width: 0; }
+  .footer__logo { width: 77px; height: auto; }
+  .sub { height: auto; padding: var(--space-6) var(--space-5); }
+  .cols { grid-template-columns: repeat(2, 1fr); gap: var(--space-3) var(--space-6); }
+  .footer__bar { height: auto; padding: 20px var(--fpad); flex-direction: column; align-items: flex-start; }
+}
+
+/* small screens */
+@media (max-width: 1199px) {  .nav__links { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {  }
+
+/* liquid glass (Chromium): refraction filter on top of the frosted fallback */
+.is-liquid.is-liquid { -webkit-backdrop-filter: blur(3px) var(--liquid) saturate(1.6) brightness(1.04); backdrop-filter: blur(3px) var(--liquid) saturate(1.6) brightness(1.04); }
+
+/* subscribe card: glass pane that slides and tilts toward the cursor, with a specular highlight that follows it */
+.sub { transform: perspective(900px) translate3d(var(--tx, 0px), var(--ty, 0px), 0) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform var(--dur-slow) var(--ease-out), box-shadow var(--dur-base) var(--ease); }
+
+.sub.is-tracking { transition: transform var(--dur-track) linear, box-shadow var(--dur-base) var(--ease); }
+
+.sub::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity var(--dur-slow) var(--ease); background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.16), rgba(255,255,255,.04) 45%, transparent 70%); }
+
+@media (hover: hover) { .sub:hover::before {opacity: 1;} }
+
+@media (prefers-reduced-motion: reduce) {  .sub { transform: none !important; }
+}
+
+/* subscribe: once the field is active the card holds still and the field turns cream */
+.sub:focus-within { transform: none !important; }
+
+.sub:focus-within::before { opacity: 0 !important; }
+
+.sub__field { transition: background var(--dur-fast) var(--ease); }
+
+.sub__field:focus-within { background: var(--light-beige-500); }
+
+.sub__field:focus-within input { color: var(--dark-brown-500); }
+
+.sub__field:focus-within input::placeholder { color: var(--beige-700); }
+
+/* CTAs: same glass-pane hover — slide/tilt toward the cursor, highlight follows it */
+.btn { transform: perspective(600px) translate3d(var(--tx, 0px), var(--ty, 0px), 0) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform var(--dur-slow) var(--ease-out), box-shadow var(--dur-base) var(--ease), background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
+
+.btn.is-tracking { transition: transform var(--dur-track) linear, box-shadow var(--dur-base) var(--ease), background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
+
+@media (hover: hover) { }
+
+@media (prefers-reduced-motion: reduce) {  .btn { transform: none !important; }
+}
+
+/* subscribe card: 1px gradient rim light (bright top-left and bottom-right, soft elsewhere) like the design */
+.sub::after { content: ""; position: absolute; inset: 0; padding: 1px; border-radius: inherit; pointer-events: none; background: linear-gradient(135deg, rgba(255,255,255,.7), rgba(255,255,255,.14) 28%, rgba(255,255,255,.08) 62%, rgba(255,255,255,.4)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
+
+/* nav: clear glass — light bends at the edges, only a whisper of blur */
+.nav.is-liquid { -webkit-backdrop-filter: blur(3px) var(--liquid) saturate(1.6) brightness(1.04); backdrop-filter: blur(3px) var(--liquid) saturate(1.6) brightness(1.04); background: var(--surface); border-bottom: 0; box-shadow: none; }
+
+/* Nav: soft shadow once the page scrolls */
+.nav { transition: box-shadow var(--dur-base) var(--ease); }
+
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {  html { scroll-behavior: auto; }
+}
+
+/* CTA colour hover: a small colour shift, same idea as the meat tabs */
+@media (hover: hover) { .btn--primary:hover,.sub__field .btn--primary:hover {background: var(--brown-500);} }
+
+/* Subscribe card: same idea, drop the tilt at once when the field gets focus */
+.sub:focus-within { transition: box-shadow var(--dur-base) var(--ease); }
+
+/* Keyboard focus: thin, soft brown ring, only when navigating with the keyboard (never after a mouse click) */
+:focus-visible { outline: 2px solid var(--green-500); outline-offset: 3px; }
+
+.is-mouse :focus-visible { outline: none; }
+
+/* promote to its own layer only while the pointer is moving it (many always-on layers + glass filters can blank the page while scrolling) */
+.btn.is-tracking, .sub.is-tracking { will-change: transform; }
+
+/* nav: plain solid white, no glass or blur (glass on a fixed bar can blank the page while scrolling) */
+.nav, .nav.is-liquid { -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+/* input fields: tighter corners (field 8px, button inside 6px) */
+.sub__field { border-radius: var(--r-sm); }
+
+
+/* all CTA buttons: same corner as the Subscribe button (6px) */
+
+/* all CTA buttons: fully rounded left and right ends (pill) */
+.btn, .btn--primary, .btn--secondary, .btn--outline, .sub__field .btn { border-radius: var(--r-pill); }
+
+/* ==== System rules ==== */
+/* Body text on light backgrounds is lighter than headings (Brown 400 vs Dark Brown 500) */
+:root { --c-sub: var(--brown-400); }
+/* Shadows: small = resting, medium = hover, large = floating panels */
+ .nav__menu {box-shadow: var(--shadow-md);}
+@media (hover: hover) { .btn:hover {box-shadow: var(--shadow-md);} }
+.nav.is-scrolled, .nav.is-liquid.is-scrolled { box-shadow: var(--shadow-sm); }
+@media (hover: hover) { .sub:not(:focus-within) .sub__field .btn:hover {box-shadow: none;} }
+/* Text on dark backgrounds: White for headings / hover, Light Beige 600 for secondary text */
+.cols__h, .sub__title {color: var(--white);}
+@media (hover: hover) { .cols a:hover,.footer__social a:hover {color: var(--white);} }
+.cols a { color: var(--light-beige-600); }
+
+/* HOVER RULES. One shape of hover per kind of element:
+   1. Object (button, card, point): lifts with box-shadow var(--shadow-md); buttons may also change fill (primary goes to --brown-500, outline fills with --c-primary).
+   2. Row (menu item, list row, accordion item, side tab): background var(--c-hover); the lines around a hovered row hide.
+   3. Plain text link: text colour only.
+   4. Small icon: moves up 2px and changes colour.
+   Do not mix: pick the kind first, then use its rule. */
+/* ACCORDION (FAQ-style question list; opening one closes the others, see core.js): <details class="acc"><summary>Question</summary><div class="acc__a"><p>Answer</p></div></details>. Lines sit between items only; plus turns to a cross when open. */
+.acc { position: relative; isolation: isolate; margin-bottom: var(--space-2); }
+.acc::before { content: ""; position: absolute; z-index: -1; inset: 0 calc(-1 * var(--space-4)); border-radius: var(--r-card); background: var(--c-hover); transition: background var(--dur-fast) var(--ease); }
+.acc:last-child { margin-bottom: 0; }
+@media (hover: hover) { .acc:not([open]):hover::before {background: var(--c-hover-deep);} } /* every question is a card (--c-hover); hovering a closed one deepens it one step; an open one keeps its colour */
+.acc summary { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--row-pad) 0; cursor: pointer; list-style: none; font-family: var(--f-head); font-size: var(--fs-title); font-weight: 600; line-height: 1.3; color: var(--c-headline); transition: color var(--dur-fast) var(--ease); }
+.acc summary::-webkit-details-marker { display: none; }
+.acc summary::after { content: ""; flex: none; width: var(--icon-sm); height: var(--icon-sm); --plus: var(--beige-700); background: linear-gradient(var(--plus),var(--plus)) center/10px 2px no-repeat, linear-gradient(var(--plus),var(--plus)) center/2px 10px no-repeat; transition: transform var(--dur-base) var(--ease), --plus var(--dur-fast) var(--ease); }
+.acc[open] summary::after { transform: rotate(45deg); }
+.acc__a { margin-top: calc(var(--space-2) - var(--row-pad)); padding: 0 0 var(--row-pad); max-width: var(--measure); } /* the row padding stays fixed; the answer is pulled up so question to answer is 8px */
+.acc__a p { font-size: var(--fs-body); font-weight: 400; line-height: 1.55; color: var(--c-sub); }
+.acc__a p + p { margin-top: var(--space-3); }
+.acc__a b { font-weight: 600; color: var(--c-headline); }
+.acc__a a { color: var(--c-headline); text-decoration: underline; text-underline-offset: 3px; }
+
+/* SIDE TABS (vertical category list; a row on small screens): <div class="sidetabs" role="tablist"><button class="sidetab is-active" role="tab">Name</button>…</div> */
+.sidetabs { display: flex; flex-direction: column; gap: var(--space-2); }
+.sidetab { text-align: left; padding: var(--space-3) var(--space-4); border: 0; border-radius: var(--r-md); background: none; cursor: pointer; font-family: var(--f-head); font-size: var(--fs-lead); font-weight: 500; color: var(--c-sub); transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
+@media (hover: hover) { .sidetab:hover {color: var(--c-headline); background: var(--c-hover);} }
+@media (hover: hover) { .sidetab.is-active:hover {background: var(--beige-300);} }
+.sidetab.is-active { background: var(--beige-300); color: var(--c-headline); font-weight: 600; }
+@media (max-width: 599px) { .sidetabs {overflow-x: auto; } }
+
+/* MOBILE NAV (1199px and below): burger on the left, logo centred, Order Now on the right; the burger opens a link panel under the bar. */
+.nav__burger, .nav__panel { display: none; }
+@media (max-width: 1199px) {
+  .nav { display: grid; grid-template-columns: 1fr auto 1fr; }
+  .nav__burger { display: flex; justify-self: start; padding: var(--space-1); border: 0; background: none; color: var(--c-headline); cursor: pointer; }
+  .nav__burger svg { width: 28px; height: 28px; }
+  .nav__right { justify-self: end; }
+  .nav__panel { position: fixed; z-index: -1; top: 0; bottom: 0; left: 0; right: 0; overflow-y: auto; flex-direction: column; padding: var(--nav-h) var(--page-inset) var(--space-4); background: var(--surface); }
+  .nav.is-menu-shown .nav__panel { display: flex; }
+  .nav__panel > a, .nav__pbtn, .nav__psub a { padding: var(--space-4) 0; font-size: var(--fs-body); color: var(--brown-500); }
+  .nav__panel > a, .nav__pbtn { border-bottom: 1px solid var(--beige-300); }
+  .nav__panel a { display: block; }
+  .nav__panel a[aria-current="page"] { font-weight: 700; color: var(--dark-brown-500); }
+}
+
+/* FOOTER ON PHONES (599px and below): three blocks (logo + brand + social, subscribe, links), everything centred, extra space between blocks. */
+@media (max-width: 599px) {
+  .footer__inner { align-items: center; text-align: center; padding-top: var(--space-6); padding-bottom: 64px; }
+  .sub { align-self: stretch; margin-top: var(--space-8); }
+  .sub__title { justify-content: center; text-align: left; }
+  .footer__brand { width: auto; }
+  .footer__social { justify-content: center; }
+  .cols { margin-top: var(--space-8); align-self: stretch; grid-template-columns: 1fr; justify-items: center; row-gap: var(--space-5); }
+  .footer__bar { align-items: center; text-align: center; }
+  .legal { flex-wrap: wrap; justify-content: center; }
+}
+
+/* MOBILE TYPE (599px and below): big section headlines (h2) are 24px on every page, via the two h2 tokens. Item headlines (story, points, strip) stay 18px; section subtitles 16px. */
+@media (max-width: 599px) { :root { --fs-h2: 24px; --fs-h2-sm: 24px; --fs-h1: 28px; /* hero title = section headline + 4px */ --btn-h-m: 46px; /* every button on phones */ --field-h: 46px; /* every input field on phones, same as a button */ --gap-section: var(--space-8); /* big sections on phones: 40px */ --gap-head: var(--space-6); /* headline block to its content on phones: 24px */ --gap-sub: var(--space-2); --row-pad: var(--space-4); --card-pad: var(--space-5); } }
+
+/* Long text on phones (599px and below): paragraphs are 14px, including FAQ answers. */
+@media (max-width: 599px) { .acc__a p { font-size: var(--fs-sm); } }
+
+/* BUTTONS ON PHONES (599px and below): every button is 46px high (--btn-h-m) with 14px text. Buttons in the page body are also full width; the nav button and the footer Subscribe button keep their own width. Text-style links like "Why Choose Rabbit?" are not buttons. */
+@media (max-width: 599px) {
+  main .btn:not(.protein-link) { width: 100%; height: var(--btn-h-m); padding: 0 var(--space-4); font-size: var(--fs-sm); }
+  .nav .btn, .sub__field .btn { height: var(--btn-h-m); padding: 0 var(--space-4); }
+  .hero__cta { width: 100%; }
+  .wrapped__btns { align-self: stretch; }
+}
+
+/* Mobile menu: "Products" opens its two pages under it (arrow turns over). */
+@media (max-width: 1199px) {
+  .nav__pbtn { display: flex; align-items: center; justify-content: space-between; width: 100%; border-top: 0; border-left: 0; border-right: 0; background: none; font: inherit; font-size: var(--fs-body); cursor: pointer; }
+  .nav__pbtn svg { width: 10px; height: 6px; transition: transform var(--dur-fast) var(--ease); }
+  .nav__pgroup.is-open .nav__pbtn svg { transform: rotate(180deg); }
+  .nav__psub { display: none; flex-direction: column; gap: var(--space-6); padding: var(--space-4) 0 var(--space-7); }
+  .nav__psub a { display: flex; align-items: center; gap: var(--space-4); padding: 0; }
+  .nav__thumb { width: var(--space-12); height: var(--space-12); flex: none; object-fit: cover; border-radius: var(--r-md); }
+  .nav__pgroup.is-open .nav__psub { display: flex; }
+}
+
+/* Mobile menu on tablets (600 to 1199px): everything one step larger than on phones. Text 20px (--fs-subtitle), rows 20px high padding, pictures 96px, arrow and burger bigger. */
+@media (min-width: 600px) and (max-width: 1199px) {
+  .nav__panel > a, .nav__pbtn, .nav__psub a { padding: var(--space-5) 0; font-size: var(--fs-subtitle); }
+  .nav__pbtn { font-size: var(--fs-subtitle); }
+  .nav__pbtn svg { width: 14px; height: 8px; }
+  .nav__psub { gap: var(--space-6); padding: var(--space-5) 0 var(--space-8); }
+  .nav__psub a { gap: var(--space-5); padding: 0; }
+  .nav__thumb { width: var(--space-12); height: var(--space-12); }
+  .nav__burger svg { width: 32px; height: 32px; }
+}
+
+/* Burger turns into a cross while the menu is open. */
+.nav__burger path { transform-box: fill-box; transform-origin: center; transition: transform var(--dur-base) var(--ease), opacity var(--dur-fast) var(--ease); }
+.nav.is-menu-open .nav__burger .b1 { transform: translateY(6px) rotate(45deg); }
+.nav.is-menu-open .nav__burger .b2 { opacity: 0; }
+.nav.is-menu-open .nav__burger .b3 { transform: translateY(-6px) rotate(-45deg); }
+
+/* MOBILE MENU ROW STATES (1199px and below). Default: brown text, line under the row. Current page: bold, dark text. Open group (Products): looks selected (bold, dark), the line under its row is removed and the next row gets the line on top instead, so a line always separates the group from what follows. */
+@media (max-width: 1199px) {
+  .nav__pgroup.is-open .nav__pbtn { font-weight: 700; color: var(--dark-brown-500); border-bottom-color: transparent; }
+  .nav__pgroup.is-open + a { border-top: 1px solid var(--beige-300); }
+}
+
+/* HOVER AND TAP RULES. Mouse (even in a narrow browser window): the element shows its hover effect, see HOVER RULES above. Touch (phones, tablets): there is no hover, so the same effect shows while the element is pressed (:active). Rows use --c-hover, objects the --shadow-md lift, text links the colour change. */
+.acc:not([open]):has(> summary:active)::before { background: var(--c-hover-deep); }
+.sidetab:active { background: var(--c-hover); color: var(--c-headline); }
+.nav__menu a:active { background: var(--c-hover); }
+.btn:active { box-shadow: var(--shadow-md); }
+.nav__links a:not([aria-current="page"]):active, .cols a:active { color: var(--beige-700); }
+.cols a:active { color: var(--white); }
+@media (max-width: 1199px) {
+  
+  .nav__panel > a:active, .nav__pbtn:active, .nav__psub a:active {background: var(--c-hover); box-shadow: 0 0 0 var(--space-2) var(--c-hover); border-radius: var(--r-md);}
+@media (hover: hover) { .nav__panel > a:hover,.nav__pbtn:hover,.nav__psub a:hover {background: var(--c-hover); box-shadow: 0 0 0 var(--space-2) var(--c-hover); border-radius: var(--r-md);} }
+}
+
+/* Mobile menu: the lines around a hovered / pressed row hide (hover rule 2), so no line shows inside or curves along the highlight. */
+@media (max-width: 1199px) {
+  .nav__panel > a:is(:hover, :active), .nav__pbtn:is(:hover, :active) { border-color: transparent; }
+  .nav__panel > a:has(+ a:is(:hover, :active)),
+  .nav__panel > a:has(+ .nav__pgroup > .nav__pbtn:is(:hover, :active)),
+  .nav__pgroup:has(+ a:is(:hover, :active)) .nav__pbtn { border-bottom-color: transparent; }
+}
+
+/* MOBILE RULES: the full list of phone sizes and spacing (type, spacing, buttons, blocks) is in README.md, section "Mobile rules". Keep the two in step. */
+
+/* PAGE BLOCKS (use these on every new page, Homepage first).
+   <section class="sec"><h2 class="sec__h">Headline</h2><p class="sec__sub">Subtitle</p> … </section>
+   Item inside a block: <h3 class="item__h">Title</h3><p class="item__p">Text</p>
+   Sizes come from the type scale; phone values are applied at 599px and below (see README, Desktop rules and Mobile rules). */
+.sec { padding: var(--gap-section) var(--page-inset) 0; text-align: center; }
+.sec__h { max-width: 796px; margin: 0 auto; font-family: var(--f-head); font-size: var(--fs-h2); font-weight: 700; line-height: 1.25; color: var(--c-headline); }
+.sec__sub { max-width: 780px; margin: var(--space-2) auto 0; font-size: var(--fs-lead); font-weight: 400; line-height: 1.5; color: var(--c-sub); }
+.item__h { margin-bottom: var(--space-2); font-family: var(--f-head); font-size: var(--fs-lead); font-weight: 600; line-height: 1.3; color: var(--c-headline); }
+.item__p { font-size: var(--fs-body); font-weight: 400; line-height: 1.55; color: var(--c-sub); }
+@media (max-width: 599px) {
+  .sec { padding: var(--space-8) var(--fm) 0; }
+  .sec__sub { font-size: var(--fs-body); }
+  .item__p { font-size: var(--fs-sm); }
+}
+
+/* FORM FIELD (general input, used by Contact and any new form): <div class="field"><input id="x" placeholder=" "><label for="x">Label</label></div>
+   Cream fill, 8px corners, the label rides up when the field is focused or filled. Height --field-h: 64px on desktop; on phones 46px, the same as a button, and the label sits above the field (small, fixed) instead of riding up. */
+.field { position: relative; }
+.field input, .field textarea { width: 100%; display: block; border: 0; border-radius: var(--r-sm); background: var(--c-cream); color: var(--c-headline); font: 400 var(--fs-body)/1.4 var(--f-body); padding: var(--space-6) var(--space-5) var(--space-2); transition: background var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); resize: vertical; }
+.field input, .field textarea { box-shadow: inset 0 0 0 1px var(--beige-500); } /* resting outline; focus makes it 2px green-brown, an error makes it red */
+.field input { height: var(--field-h); }
+.field textarea { min-height: 200px; padding-top: var(--space-7); }
+.field label { position: absolute; left: 20px; top: 21px; font: 400 var(--fs-body)/1.2 var(--f-body); color: var(--beige-700); pointer-events: none; transition: top var(--dur-fast) var(--ease), font-size var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
+.field input:focus + label, .field input:not(:placeholder-shown) + label,
+.field textarea:focus + label, .field textarea:not(:placeholder-shown) + label { top: 10px; font-size: 12px; color: var(--beige-800); }
+.field input:focus, .field textarea:focus { outline: none; background: var(--surface); box-shadow: inset 0 0 0 2px var(--c-primary); }
+.field.is-invalid input, .field.is-invalid textarea { box-shadow: inset 0 0 0 1px var(--red); }
+@media (max-width: 599px) {
+  .field { display: flex; flex-direction: column; }
+  .field label { order: -1; }
+  .field input, .field textarea { height: var(--field-h); padding: 0 var(--space-4); }
+  .field textarea { height: auto; min-height: 140px; padding: var(--space-3) var(--space-4); }
+  .field label, .field input:focus + label, .field input:not(:placeholder-shown) + label, .field textarea:focus + label, .field textarea:not(:placeholder-shown) + label { position: static; margin-bottom: var(--space-1); font-size: var(--fs-xs); color: var(--beige-800); }
+  /* Subscribe on phones: email field and button stacked, both 46px */
+  .sub__field { flex-direction: column; align-items: stretch; height: auto; padding: 0; gap: var(--space-2); background: none; }
+  .sub__field input { flex: none; height: var(--field-h); padding: 0 var(--space-4); border-radius: var(--r-sm); background: rgba(255,255,255,.4); }
+  .sub__field .btn { width: 100%; }
+  .sub__field:focus-within { background: none; }
+  .sub__field input:focus { background: var(--light-beige-500); }
+}
+
+/* FORM ERRORS AND INACTIVE BUTTONS. An error sits directly under its field (red text, red outline on the field). A button is inactive (greyed, not clickable) while a required field is missing or wrong; see core.js "FORMS". */
+.field__error { margin-top: var(--space-1); font-size: var(--fs-sm); line-height: 1.4; color: var(--red-600); }
+.field__error[hidden] { display: none; }
+.sub .field__error { margin-top: var(--space-2); color: var(--red-300); }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: .4; cursor: not-allowed; pointer-events: none; box-shadow: none; }
+
+/* SIDE TABS ON PHONES (599px and below): the category list becomes an accordion. Each category is its own rounded card (name + plus) with a light background (`--c-page`);
+   tapping it opens its questions right under it, one category at a time. The open category, hover and tap use `--c-hover`. The questions inside are 16px, with lines between. */
+@media (max-width: 599px) {
+  .sidetabs { flex-direction: column; gap: 0; overflow: visible; }
+  .sidetab { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); width: 100%; margin-top: var(--space-3); padding: var(--space-5) var(--space-4); border-radius: var(--r-card); border: 0; background: var(--c-page); font-size: var(--fs-lead); font-weight: 600; line-height: 1.3; color: var(--c-headline); white-space: normal; transition: background var(--dur-fast) var(--ease); }
+  .sidetab:first-child { margin-top: 0; }
+  .sidetab::after { content: ""; flex: none; width: var(--icon-sm); height: var(--icon-sm); background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%238c826e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 6l5 5 5-5'/%3E%3C/svg%3E") center/100% 100% no-repeat; transition: transform var(--dur-base) var(--ease); } /* category = arrow (down, turns up when open); the questions inside keep the plus */
+  .sidetab.is-active, .sidetab:active {background: var(--c-hover);}
+@media (hover: hover) { .sidetab.is-active:hover,.sidetab:hover {background: var(--c-hover);} }
+  .sidetab.is-active::after { transform: rotate(180deg); }
+  .sidetabs > .faq__panel { padding: var(--space-3) var(--space-4) var(--space-2); }
+  .sidetabs > .faq__panel .acc summary {font-weight: 500; } /* category 18px semibold on a card; its questions 16px medium, so the two levels read apart */
+}
+
+/* Accordion question on phones: 18px (desktop 22px, `--fs-title`); answer 14px (desktop 18px). Questions inside the FAQ category list: 16px. */
+@media (max-width: 599px) { .acc summary { font-size: var(--fs-lead); } }
+@media (max-width: 599px) { .sidetabs > .faq__panel .acc summary { font-size: var(--fs-body); } }
+
+/* ==== MOTION, TEXT, LINKS AND ACCESSIBILITY (see README) ==== */
+/* Every animation and transition stops when the visitor asks for reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+/* Links. Inline link in text: dark, underlined, colour change on hover. Standalone action link: same, semibold. Nav and footer links have no underline. */
+.link, .acc__a a, .faq__more a, .pfaq__more a { color: var(--c-link); text-decoration: underline; text-underline-offset: 3px; transition: color var(--dur-fast) var(--ease); }
+@media (hover: hover) { .link:hover,.acc__a a:hover,.faq__more a:hover,.pfaq__more a:hover {color: var(--c-link-hover);} }
+.link--action { font-weight: 600; }
+/* Focus ring on dark backgrounds is cream (green on light). */
+.footer :focus-visible, .hero :focus-visible, .wrapped__video:focus-visible { outline-color: var(--c-cream); }
+/* Touch targets: at least 44px on phones. The picture or text keeps its size; the tappable area grows. */
+@media (max-width: 599px) {
+  .tab, .nav__burger, .contact__icons a, .footer__social a { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+  .contact__icons, .footer__social { gap: var(--space-1); }
+}
+
+/* Notch and home bar (phones in landscape, iPhones with a notch): the page runs to the screen edges (viewport-fit=cover), the side inset never goes below the notch, and the bottom keeps clear of the home bar. */
+body { padding-bottom: env(safe-area-inset-bottom, 0px); }
+
+/* Dark mode switch (nav, next to Order Now): moon in light mode, sun in dark mode. */
+.nav__right { display: flex; align-items: center; gap: var(--space-2); }
+.nav__right .btn { white-space: nowrap; }
+.theme-toggle[hidden] { display: none; }
+.theme-toggle { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: var(--r-circle); background: none; color: var(--c-headline); cursor: pointer; transition: background var(--dur-fast) var(--ease); }
+.theme-toggle svg { width: 22px; height: 22px; }
+.theme-toggle__sun, html[data-theme="dark"] .theme-toggle__moon { display: none; }
+html[data-theme="dark"] .theme-toggle__sun { display: block; }
+@media (hover: hover) { .theme-toggle:hover { background: var(--c-hover); } }
+/* Dark mode: the nav logo is dark brown, so it is shown in the light (cream) version on the dark bar. */
+html[data-theme="dark"] .nav__logo img { filter: brightness(0) invert(1) sepia(.25) saturate(.8) brightness(.95); }
+/* Dark mode footer: a little lighter than the page so the rounded card still reads; logo stays the light (cream) version. */
+html[data-theme="dark"] .footer { background: var(--c-cream); box-shadow: inset 0 0 0 1px var(--beige-400); }
+/* Dark mode: page-wide backgrounds darker; white see-through layers become dark see-through layers. */
+html[data-theme="dark"] .hero { background: var(--c-page); }
+html[data-theme="dark"] .wrapped__copy.is-liquid { background: var(--glass); }
+html[data-theme="dark"] .has-pcards .tag:not(.is-current) { background: var(--glass); }
+html[data-theme="dark"] .mtabs { background: var(--glass); }
+/* Dark mode: the Rabbit card becomes a deep pink (Rabbit 800), text light. */
+html[data-theme="dark"] .rabbit__card { background: var(--rabbit-800); color: var(--c-headline); }
+html[data-theme="dark"] .rabbit h2, html[data-theme="dark"] .rabbit__list h3 { color: var(--c-headline); }
+html[data-theme="dark"] .rabbit__eyebrow { color: var(--green-300, var(--c-sub)); }
+html[data-theme="dark"] .rabbit__sub, html[data-theme="dark"] .rabbit__list p { color: var(--rabbit-300); }
+html[data-theme="dark"] .rabbit__loop { color: var(--rabbit-400); }
+
+/* The bar shows when shared/partials/nav.html contains <div class="announce">…</div> before the nav header; the page offsets follow by themselves (remove the div and they go back). */
+:root:has(.announce) { --bar-h: 36px; }
+/* ANNOUNCEMENT BAR (reusable): a strip in brand colours (Dark Brown 500, Light Beige 500 text, same pair as the primary button and the footer) above the nav, on every page, fixed with the nav, not closable. Text lives in shared/partials/nav.html: two short items with a thin divider. Desktop: static, centred. Phones: one line that scrolls slowly from right to left (a second, hidden copy makes the loop seamless); with "reduce motion" it stays still. It is the one all-caps line on the site (a label, so no full stop). */
+.announce { position: fixed; z-index: 11; top: 0; left: 0; right: 0; height: var(--bar-h); display: flex; align-items: center; justify-content: center; padding: 0 var(--page-inset); overflow: hidden; background: var(--dark-brown-500); color: var(--light-beige-500); text-align: center; }
+.announce__track { display: flex; align-items: center; justify-content: center; }
+.announce p { display: flex; align-items: center; justify-content: center; gap: var(--space-4); font: 700 var(--fs-sm)/1.3 var(--f-body); text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
+.announce__sep { flex: none; width: 1px; height: 1.1em; background: currentColor; opacity: .5; }
+.announce .announce__copy, .announce .announce__sep--end { display: none; }
+.nav { top: var(--bar-h); }
+@media (max-width: 599px) {
+  .announce { padding: 0; justify-content: flex-start; }
+  .announce__track { justify-content: flex-start; width: max-content; animation: announce-scroll 18s linear infinite; }
+  .announce p { flex: none; font-size: var(--fs-xs); gap: var(--space-6); padding-right: var(--space-6); }
+  .announce .announce__copy, .announce .announce__sep--end { display: flex; }
+}
+@keyframes announce-scroll { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .announce__track { animation: none; } .announce .announce__copy, .announce .announce__sep--end { display: none !important; } .announce { justify-content: center; } .announce p { padding-right: 0; } }

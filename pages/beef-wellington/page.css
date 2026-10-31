@@ -1,0 +1,51 @@
+/* Beef Wellington only */
+.board { position: relative;margin: var(--space-8) auto 0; container-type: inline-size; --pad: max(7px, 1.6cqw); --hp: max(3px, .53cqw); --dotsz: max(12px, 2.4cqw); --fs: clamp(11px, calc(2.9cqw - 2px), 20px); }
+
+.wrapped__prod { display: flex; align-items: center; gap: var(--space-4); margin-top: var(--space-6); padding: var(--space-2); background: var(--surface); border-radius: var(--r-card); color: inherit; text-decoration: none; box-shadow: var(--shadow-sm); }
+
+/* story step with two paragraphs */
+.story__step > .story__text { grid-row: 3; }
+
+.story__text p { font-size: var(--fs-body); font-weight: 400; line-height: 1.55; max-width: 480px; }
+
+.story__text p + p { margin-top: var(--space-3); }
+
+.rabbit[hidden], .protein-link[hidden] { display: none; }
+
+/* colour circles: same size as the Waggin' Bites board (its board is 756px wide, this one is 1214px, so scale the circle down to match) */
+
+.board .dot { width: max(9.6px, 1.2cqw); height: max(9.6px, 1.2cqw); box-shadow: 0 0 0 max(2.4px, .264cqw) var(--white), 0 2px 7px rgba(51,43,35,.18); }
+
+/* ingredients board: 20% smaller (1214px -> 970px) */
+.board { max-width: 970px; }
+
+/* Comparison sub: two balanced lines (760px wide on desktop) */
+.compare__sub { max-width: 760px; margin-left: auto; margin-right: auto; text-wrap: balance; }
+
+/* Hero video on phones: the wide Christmas video is cropped to a near-square frame. The Wellington box sits right of centre, so the frame is moved to the right (60%) to keep the box and the dog's head in view. */
+@media (max-width: 599px) { .hero__img.hero__video { object-position: 68% 50%; } }
+
+/* Phones: this page's story text had its own 18px rule that beat the shared phone rule. Same as Waggin' Bites now: 14px, full width, 8px between paragraphs.
+   The board picture is wide and short, so it uses the full page width instead of 88% to keep the labels readable. */
+@media (max-width: 599px) {
+  .story__text p { font-size: var(--fs-sm); line-height: 1.55; max-width: none; }
+  .story__text p + p { margin-top: var(--space-2); }
+}
+@media (max-width: 599px) {
+  /* Phone: the picture is 70% larger than the text column (170%), centred; the sides are cropped by the section. Labels sit in % of the picture, so they stay on their ingredients and scale up with it. */
+  .ingredients > .board { width: 170%; max-width: none; flex: none; margin-left: -35%; margin-right: -35%; translate: 4.4% 0; } /* auto margins cannot go negative, so the centring is set explicitly: (100% - 170%) / 2 */
+}
+
+/* Phones: the hero headline keeps only its second line; the first line moves to the top of the comparison headline. Desktop is unchanged. */
+.phone-only { display: none; }
+@media (max-width: 599px) {
+  .phone-hide { display: none; }
+  .phone-only { display: inline; }
+}
+
+/* Phones: the two comparison sentences run together and wrap evenly, so no line is a single word. */
+@media (max-width: 599px) {
+  .compare .h2 { text-wrap: balance; }
+  .phone-only br { display: none; }
+  .phone-only::after { content: " "; }
+}
